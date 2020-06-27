@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import SaldoSlider from '../../components/SaldoSlider';
+import { Text, View, FlatList, TouchableOpacity } from 'react-native';
 
 const TopPickWidget = () => {
     const [selected, setSelected] = React.useState('All')
@@ -15,18 +14,18 @@ const TopPickWidget = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item)=>item}
-            renderItem={({item})=> <CategoryItem type={item} isSelected={item === selected}/>}
+            renderItem={({item})=> <CategoryItem type={item} isSelected={item === selected} onPress={setSelected}/>}
             />
         </View>
     )
 }
 
 const CategoryItem = (props: any) => {
-    const { type, isSelected } = props
+    const { type, isSelected, onPress } = props
     return (
-        <View style={{ justifyContent: 'center', alignItems: 'center', paddingVertical: 8, paddingHorizontal:16, borderRadius:24, borderWidth: isSelected ? 0 : 1, borderColor:'#CACCCF', backgroundColor:isSelected? '#31B057' : 'transparent' }}>
+        <TouchableOpacity onPress={()=>onPress(type)} style={{ justifyContent: 'center', alignItems: 'center', paddingVertical: 8, paddingHorizontal:16, borderRadius:24, borderWidth: isSelected ? 0 : 1, borderColor:'#CACCCF', backgroundColor:isSelected? '#31B057' : 'transparent' }}>
             <Text style={{color:isSelected? 'white': '#494A4A'}}>{type}</Text>
-        </View>
+        </TouchableOpacity>
     )
 }
 

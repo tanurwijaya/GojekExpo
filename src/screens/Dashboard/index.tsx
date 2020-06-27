@@ -1,10 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
 import TabTitle from '../../components/TabTitle'
-import DragableSheet from '../../components/DragableSheet'
 import ViewPager from '@react-native-community/viewpager'
 import HomeScreen from '../Home';
-import FeatureWidget from '../Home/FeatrueWidget'
 import ChatScreen from '../Chat'
 import PromosScreen from '../Promos'
 
@@ -57,10 +55,9 @@ const DashboardScreen = () => {
                 </View>
 
                 <ViewPager ref={viewPagerRef} initialPage={1} style={{ flex: 1 }} pageMargin={8} orientation={'horizontal'} onPageSelected={onPageSelected} onPageScrollStateChanged={onPageScrollStateChanged} onPageScroll={onPageScroll}>
-                    <PromosScreen key={1}/>
+                    <PromosScreen key={1} />
                     <View key={2}>
                         <HomeScreen />
-                        <FeatureWidget />
                     </View>
                     <ChatScreen key={3} />
                 </ViewPager>

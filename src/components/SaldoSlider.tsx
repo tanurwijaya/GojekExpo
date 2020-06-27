@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import SaldoAmount from './SaldoAmount';
 import PaylaterAmount from './PaylaterAmount';
 
@@ -19,6 +19,7 @@ const SaldoSlider = () => {
 
             </View>
             <ScrollView
+                nestedScrollEnabled
                 onScroll={handleScroll}
                 decelerationRate={0}
                 showsVerticalScrollIndicator={false}

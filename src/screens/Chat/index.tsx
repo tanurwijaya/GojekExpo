@@ -1,59 +1,55 @@
 import React from 'react'
-import { View, Text, FlatList } from 'react-native'
-import TabTitle from '../../components/TabTitle'
+import { View, Text, FlatList, TouchableOpacity } from 'react-native'
 import DragableSheet from '../../components/DragableSheet'
-import ViewPager from '@react-native-community/viewpager'
-import HomeScreen from '../Home';
-import FeatureWidget from '../Home/FeatrueWidget'
 
 const ChatScreen = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <DragableSheet key={1} style={{ flex: 1, borderTopLeftRadius: 16, borderTopRightRadius: 16 }}>
-        <View style={{ padding: 16 }}>
+    <DragableSheet key={1} style={{ borderTopLeftRadius: 16, borderTopRightRadius: 16 }}>
+      <View>
+        <FlatList
+          style={{ padding: 16 }}
+          ListHeaderComponent={<HeaderChat />}
+          data={['Adib Ralali', 'Imelda', 'Devina', 'Peter Ralali', 'Test', 'a']}
+          keyExtractor={(item) => item.toString()}
+          renderItem={({ item }) => <ChatItem item={item} />}
+          ItemSeparatorComponent={() => <View style={{ marginLeft: 56, height: 1, flex: 1, backgroundColor: '#F0F2F5', marginVertical: 16 }} />}
+        />
 
-          <View style={{ marginBottom: 40 }}>
-            <Text style={{ fontWeight: 'bold', marginBottom: 24 }}>Quick actions</Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-              <ActionItem onPress={() => { }} color={'#F06400'} text={'Inbox'} />
-              <ActionItem onPress={() => { }} color={'#00AA13'} text={'New Group'} />
-              <ActionItem onPress={() => { }} color={'#00AED6'} text={'Split Bill'} />
-              <ActionItem onPress={() => { }} color={'#00AED6'} text={'Pay'} />
-            </View>
-          </View>
-
-          <View>
-            <Text style={{ fontWeight: 'bold', marginBottom: 24 }}>Your chats</Text>
-            <FlatList
-              data={['Adib Ralali', 'Imelda', 'Devina', 'Peter Ralali']}
-              keyExtractor={(item) => item.toString()}
-              renderItem={({ item }) => <ChatItem item={item} />}
-              ItemSeparatorComponent={() => <View style={{ marginLeft: 56, height: 1, flex: 1, backgroundColor: '#F0F2F5', marginVertical: 16 }} />}
-            />
-          </View>
-
-          <View style={{
-            width: 56, height: 56, borderRadius: 28, backgroundColor: '#00880D', position: 'absolute', display: 'none', right: 32, bottom: -32,
-            justifyContent: 'center',
-            alignItems: 'center',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 4
-            },
-            shadowOpacity: 0.75,
-            shadowRadius: 4,
-            elevation: 6,
-          }}>
-            <View style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: 'white' }} />
-          </View>
+        <View style={{
+          width: 56, height: 56, borderRadius: 28, backgroundColor: '#00880D', position: 'absolute', display: 'none', right: 32, bottom: 64,
+          justifyContent: 'center',
+          alignItems: 'center',
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 4
+          },
+          shadowOpacity: 0.75,
+          shadowRadius: 4,
+          elevation: 6,
+        }}>
+          <View style={{ width: 20, height: 20, borderRadius: 4, backgroundColor: 'white' }} />
         </View>
+      </View>
+    </DragableSheet>
 
-      </DragableSheet>
-
-    </View>
   )
 }
+
+const HeaderChat = () => (
+  <View>
+    <View style={{ marginBottom: 40 }}>
+      <Text style={{ fontWeight: 'bold', marginBottom: 24 }}>Quick actions</Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+        <ActionItem onPress={() => { }} color={'#F06400'} text={'Inbox'} />
+        <ActionItem onPress={() => { }} color={'#00AA13'} text={'New Group'} />
+        <ActionItem onPress={() => { }} color={'#00AED6'} text={'Split Bill'} />
+        <ActionItem onPress={() => { }} color={'#00AED6'} text={'Pay'} />
+      </View>
+    </View>
+    <Text style={{ fontWeight: 'bold', marginBottom: 24 }}>Your chats</Text>
+  </View>
+)
 
 interface ActionItemProps {
   onPress(): any,
@@ -84,7 +80,7 @@ const ChatItem = (props: ChatItemProps) => {
   var acronym = matches?.join(''); // JSON
 
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+    <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
       <View style={{ flexDirection: 'row' }}>
         <View style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: '#216BC4', justifyContent: 'center', alignItems: 'center' }}>
@@ -99,7 +95,7 @@ const ChatItem = (props: ChatItemProps) => {
 
       <Text style={{ color: '#BBBBBB', marginRight: 8 }}>16/06/20</Text>
 
-    </View>
+    </TouchableOpacity>
   )
 }
 

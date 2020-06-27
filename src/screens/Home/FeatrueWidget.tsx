@@ -1,12 +1,9 @@
-// eslint-disable-next-line react-hooks/exhaustive-deps
 import React from 'react';
 import { StyleSheet, Text, View, PanResponder, Dimensions, Animated, TouchableOpacity } from 'react-native';
 import DragableSheet from '../../components/DragableSheet';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
-
-console.log({ windowHeight })
 
 const FeatureWidget = () => {
 
@@ -60,12 +57,11 @@ const FeatureWidget = () => {
 
     const panResponder = React.useMemo(() => PanResponder.create({
         onPanResponderGrant: (evt, gestureState) => {
-            console.log('a')
         },
         onStartShouldSetPanResponder: (evt, gestureState) => true,
         onPanResponderMove: (evt, gestureState) => {
             scrollY.setValue(windowHeight - evt.nativeEvent.pageY - 117) //height widget 
-            console.log({y:windowHeight - evt.nativeEvent.pageY - 117})
+            console.log({ y: windowHeight - evt.nativeEvent.pageY - 117 })
         },
         onPanResponderRelease: (evt, gestureState) => {
 
@@ -74,12 +70,11 @@ const FeatureWidget = () => {
     }), [])
 
     return (
-        <View style={{zIndex:99}}>
-            <Animated.View style={{ position: 'absolute', width: windowWidth, height: 0, left: 0, right: 0, bottom: 0, backgroundColor: animatedBackgroundColor, alignItems: 'center' }} />
-            <View style={{ width: windowWidth, backgroundColor: 'blue', alignItems: 'center' }}>
+        <View style={{ zIndex: 99, height: windowHeight, }}>
+            <Animated.View style={{ width: windowWidth, backgroundColor: animatedBackgroundColor, alignItems: 'center', flex: 1 }} />
+            <View style={{ position: 'absolute', bottom: 0, width: windowWidth, flex: 1, alignItems: 'center' }}>
                 <Animated.View {...panResponder.panHandlers} style={{
                     flex: 1,
-                    position: 'absolute',
                     zIndex: 8,
 
                     // opacity:animatedAlpha,
@@ -117,11 +112,11 @@ const FeatureWidget = () => {
 
 const FeatureItem = () => {
     return (
-        <TouchableOpacity onPress={()=>{}}>
-        <View style={{ marginHorizontal: 16, alignItems: 'center' }}>
-            <View style={{ width: 40, height: 40, backgroundColor: '#00AA13', borderRadius: 20 }} />
-            <Text style={{ marginTop: 4 }}>GoRide</Text>
-        </View>
+        <TouchableOpacity onPress={() => { }}>
+            <View style={{ marginHorizontal: 16, alignItems: 'center' }}>
+                <View style={{ width: 40, height: 40, backgroundColor: '#00AA13', borderRadius: 20 }} />
+                <Text style={{ marginTop: 4 }}>GoRide</Text>
+            </View>
         </TouchableOpacity>
     )
 }
